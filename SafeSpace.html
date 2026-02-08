@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="./SafeSpace.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
+
+</head>
+<body>
+   <div class="video-bg">
+    <video autoplay muted loop playsinline id="video-bg">
+     <source src="./videos/143752-784138189_large.mp4" type="video/mp4"/>
+</video>
+
+<nav class="navbar">
+
+   <div class="logo">
+    <img src="./Images/IMG-20251205-WA0007-removebg-preview (1).png" width="80" height="80"/>
+    </div>
+
+ <button class="menu-toggle" id="menuToggle">
+    <i class="fa-solid fa-bars-staggered"></i>
+ </button>
+
+    <ul class="links" id="navLinks">
+        <li><a href="./index.html">Home</a></li>   
+        <li><a href="">About</a></li>
+        <li><a href="">Contact Us</a></li>
+        <button class="affirmation-btn" id="openAffirmation">Daily affirmation</button>
+    </ul>
+</nav>
+
+
+
+<div class="overlay-text">
+  <p class="safe-text">You're safe here!</p>
+  <p class="sub-text">Come to me, all you who are weary and burdened, and I will give you rest. <br> (Matthew 11:28)</p>
+<textarea placeholder="Write what's on your mind..." type="text" class="write-up" rows="4" id="sender-message"></textarea>
+<input placeholder="Enter whatsapp phone no." type="number" class="user-no" id="sender-no"/>
+
+
+    <button class="share-btn" id="share-btn">Share</button>
+</div>
+
+ <div class="modal-backdrop" id="affirmationModal">
+<div class = "modal-card">
+  <button class="modal-close" id="closeAffirmation">&times;</button>
+
+<div class="modal-label">Safe Space</div>
+<div class="modal-title" id="headline">Say this to yourself today</div>
+
+<div class="modal-text" id="affirmationText"></div>
+<div class="modal-ref" id="affirmationRef"></div>
+
+</div>
+</div> 
+
+<script src="SafeSpace.js"></script>
+</body>
+</html>
