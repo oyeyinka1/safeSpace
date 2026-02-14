@@ -131,6 +131,23 @@ background: linear-gradient(135deg, #1b1010 0%, #3b2414 35%, #f6b322 120%);
   box-shadow: 0 80px 20px rgba(246, 179, 34 0.7);
 }
 
+.signup-btn{
+background-color: black;
+padding: 12px 24px;
+color: white;
+border-radius: 5px;
+font-size: 18px;
+/* font-weight: bold; */
+cursor:pointer;
+border: none;
+/* background: linear-gradient(150deg, black 80%, white 10%, #f6b322 2%); */
+}
+
+.signup-btn:hover{
+  transform: scale(1.04);
+  box-shadow: 0 80px 20px rgba(246, 179, 34 0.7);
+}
+
 .modal-backdrop{
   position: fixed;
 inset:0;
@@ -410,6 +427,7 @@ right:auto;
   }
   .overlay-text .sub-text {
     font-size: 1.8  rem;
+    margin-bottom: 20px;
   }
 
  .menu-toggle{

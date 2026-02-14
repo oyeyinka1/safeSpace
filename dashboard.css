@@ -1,0 +1,640 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-bg: #faf8f3;
+    --card-bg: #ffffff;
+    --text-primary: #3a3a3a;
+    --text-secondary: #8a8a8a;
+    --accent-warm: #c9a876;
+    --accent-light: #e8dcc8;
+    --border-color: #f0ebe3;
+    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--card-bg);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    cursor: pointer;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    gap:7px;
+    /* background: linear-gradient(135deg, var(--accent-warm), var(--accent-light)); */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Inbox Icon */
+.inbox-icon-wrapper {
+    position: relative;
+    margin-right: 2.5rem;
+}
+
+.inbox-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.inbox-btn:hover {
+    transform: scale(1.1);
+}
+
+.inbox-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #d97706;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.inbox-badge.hidden {
+    display: none;
+}
+
+/* Inbox Modal */
+.inbox-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    animation: fadeIn 0.2s ease;
+}
+
+.inbox-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.inbox-modal-content {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 600px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-medium);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.inbox-modal-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inbox-modal-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.close-inbox-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.close-inbox-btn:hover {
+    color: var(--text-primary);
+}
+
+.inbox-messages-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inbox-message-item {
+    background-color: var(--primary-bg);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    border-left: 4px solid var(--accent-warm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.inbox-message-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-soft);
+}
+
+.inbox-message-item.unread {
+    background-color: #fef3c7;
+    border-left-color: #f59e0b;
+}
+
+.inbox-message-sender {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.inbox-message-text {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.inbox-message-time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.inbox-empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.inbox-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Profile Menu */
+.profile-menu {
+    position: relative;
+}
+
+.profile-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background-color: var(--accent-light);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.profile-btn:hover {
+    border-color: var(--accent-warm);
+    transform: scale(1.05);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: none;
+}
+
+.profile-image.active {
+    display: block;
+}
+
+.profile-initial {
+    font-weight: 700;
+    color: var(--accent-warm);
+    font-size: 1.25rem;
+}
+
+.profile-initial.hidden {
+    display: none;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    min-width: 180px;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-menu.active {
+    display: block;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.dropdown-item:hover {
+    background-color: var(--primary-bg);
+}
+
+/* Main Container */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Welcome Section */
+.welcome-section {
+    margin-bottom: 3rem;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.welcome-title span {
+    color: var(--accent-warm);
+}
+
+.welcome-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Affirmation Section */
+.affirmation-section {
+    margin-bottom: 3rem;
+}
+
+.affirmation-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.affirmation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+}
+
+.affirmation-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.affirmation-icon {
+    font-size: 1.5rem;
+}
+
+.affirmation-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent-warm);
+    text-transform: uppercase;
+}
+
+.affirmation-subtext {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.affirmation-text {
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.8;
+    color: var(--text-primary);
+    font-style: italic;
+}
+
+/* Chat Section */
+.chat-section {
+    margin-bottom: 3rem;
+}
+
+.chat-container {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.chat-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chat-header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.chat-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Messages Area */
+.messages-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-message {
+    align-self: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+}
+
+.message-text {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    word-wrap: break-word;
+}
+
+.admin-message .message-text {
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+}
+
+.user-message .message-text {
+    background-color: var(--accent-warm);
+    color: white;
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    padding: 0 0.25rem;
+}
+
+/* Chat Input Area */
+.chat-input-area {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--primary-bg);
+}
+
+.message-input {
+    flex: 1;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.875rem 1.125rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.message-input:focus {
+    outline: none;
+    border-color: var(--accent-warm);
+}
+
+.message-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.send-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--accent-warm), var(--accent-light));
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-soft);
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+/* Scrollbar Styling */
+.messages-area::-webkit-scrollbar,
+.inbox-messages-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages-area::-webkit-scrollbar-track,
+.inbox-messages-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-area::-webkit-scrollbar-thumb,
+.inbox-messages-list::-webkit-scrollbar-thumb {
+    background: var(--accent-light);
+    border-radius: 10px;
+}
+
+.messages-area::-webkit-scrollbar-thumb:hover,
+.inbox-messages-list::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-warm);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .header {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    .welcome-title {
+        font-size: 1.75rem;
+    }
+
+    .affirmation-card {
+        padding: 1.5rem;
+    }
+
+    .affirmation-text {
+        font-size: 1.1rem;
+    }
+
+    .chat-container {
+        height: 400px;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+
+    .chat-input-area {
+        padding: 1rem;
+    }
+
+    .message-input {
+        padding: 0.75rem 1rem;
+    }
+
+    .inbox-modal-content {
+        width: 95%;
+        max-height: 80vh;
+    }
+}

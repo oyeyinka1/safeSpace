@@ -9,6 +9,17 @@ const affirmations = [
 ];
 
 
+async function currentUser () {
+  const res = await fetch("http://localhost:8000/api/register");
+  const user = res.json();
+
+  return {
+    user: user.name,
+    email: user.email
+  } 
+}
+
+
 //  Get the same affirmation for everyone on the same day
  function getTodayAffirmation(){
     const today = new Date();
@@ -59,4 +70,24 @@ if (navLinks.classList.contains('show')){
 }else{
     icon.classList.replace('fa-xmark', 'fa-bars-staggered');
 }
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.body.classList.add("loaded");
+
+  const shareBtn = document.getElementById("share-btn");
+
+  shareBtn.addEventListener("click", function () {
+    const currentUser = localStorage.getItem("safeSpaceUser");
+
+    if (!currentUser) {
+      alert("Please sign up first so we can better assist you☺.");
+      window.location.href = "signup.html";
+      return;
+    }
+☺
+    alert("Message sent successfully. You are not alone ❤️");
+  });
 });
