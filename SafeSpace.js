@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "signup.html";
       return;
     }
-☺
+
     alert("Message sent successfully. You are not alone ❤️");
   });
 });

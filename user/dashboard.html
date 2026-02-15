@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Safe Space - Your Sanctuary</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <div>
+            <span class="logo-icon"
+              ><img
+                src="./Images/IMG-20251205-WA0007-removebg-preview (1).png"
+                width="80"
+                height="80"
+            /></span>
+          </div>
+          <span class="logo-text">Safe Space</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="inbox-icon-wrapper">
+          <button class="inbox-btn" id="inboxBtn" title="View messages">
+            <i class="fa-regular fa-envelope" style="gap: 4px"></i>
+            <span class="inbox-badge" id="inboxBadge">0</span>
+          </button>
+        </div>
+        <div class="profile-menu">
+          <button class="profile-btn" id="profileBtn">
+            <img id="profileImage" src="" alt="Profile" class="profile-image" />
+            <span id="profileInitial" class="profile-initial">M</span>
+          </button>
+          <div class="dropdown-menu" id="dropdownMenu">
+            <button class="dropdown-item" id="changePhotoBtn">
+              <i class="fa-solid fa-image"></i> Change Photo
+            </button>
+            <button class="dropdown-item" id="logoutBtn">
+              <i class="fa-solid fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Inbox Modal -->
+    <div class="inbox-modal" id="inboxModal">
+      <div class="inbox-modal-content">
+        <div class="inbox-modal-header">
+          <h2>Your Messages</h2>
+          <button class="close-inbox-btn" id="closeInboxBtn">✕</button>
+        </div>
+        <div class="inbox-messages-list" id="inboxMessagesList">
+          <!-- Messages from admin will appear here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden file input for profile picture -->
+    <input type="file" id="photoInput" accept="image/*" style="display: none" />
+
+    <!-- Main Content -->
+    <main class="container">
+      <!-- Welcome Section -->
+      <section class="welcome-section">
+        <h1 class="welcome-title">
+          Welcome back, <span id="userName">Michael</span>
+        </h1>
+        <p class="welcome-subtitle">This is your safe place. Take a breath.</p>
+      </section>
+
+      <!-- Daily Affirmation Section -->
+      <section class="affirmation-section">
+        <div class="affirmation-card">
+          <div class="affirmation-header">
+            <span class="affirmation-icon">✨</span>
+            <span class="affirmation-label">DAILY AFFIRMATION</span>
+          </div>
+          <p class="affirmation-subtext">Say this to yourself today</p>
+          <p class="affirmation-text" id="affirmationText">
+            "I am not defined by my past. God's grace is making all things new
+            in me — even now, even here."
+          </p>
+        </div>
+      </section>
+
+      <!-- Chat Section -->
+      <section class="chat-section">
+        <div class="chat-container">
+          <div class="chat-header">
+            <h2>Your Private Space</h2>
+            <p class="chat-subtitle">
+              Conversations are private and held with care
+            </p>
+          </div>
+
+          <!-- Messages Area -->
+          <div class="messages-area" id="messagesArea"></div>
+
+          <!-- Input Area -->
+          <div class="chat-input-area">
+            <input
+              type="text"
+              id="messageInput"
+              class="message-input"
+              placeholder="Type your message..."
+            />
+            <button class="send-btn" id="sendBtn">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="../js/socket.js"></script>
+    <script src="../js/chat.js"></script>
+  </body>
+</html>
