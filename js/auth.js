@@ -44,12 +44,12 @@ function parseJwt(token) {
 
 function protectRoute(requiredRole) {
   const token = localStorage.getItem("token");
-  if (!token) window.location.href = "/login.html";
+  if (!token) window.location.href = "./auth/login.html";
 
   const payload = parseJwt(token);
 
   if (payload.role !== requiredRole) {
-    window.location.href = "/login.html";
+    window.location.href = "./auth/login.html";
   }
 }
 
