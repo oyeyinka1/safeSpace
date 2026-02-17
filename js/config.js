@@ -1,1 +1,1 @@
-window.API = "https://safespace-api-39qb.onrender.com";
+window.API = "https://safespace-api-39qb.onrender.com/api";

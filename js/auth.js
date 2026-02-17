@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-const API = "https://safespace-api-39qb.onrender.com";
+const API = "https://safespace-api-39qb.onrender.com/api";
 
 function parseJwt(token) {
   return JSON.parse(atob(token.split(".")[1]));
