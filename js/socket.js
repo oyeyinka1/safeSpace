@@ -6,7 +6,7 @@ function connectSocket() {
   const token = localStorage.getItem("token");
   if (!token) return;
 
-  socket = io("http://localhost:8000", {
+  socket = io("https://safespace-api-39qb.onrender.com", {
     auth: { token },
     reconnection: true,
     reconnectionAttempts: 5,
