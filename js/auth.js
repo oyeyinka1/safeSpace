@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-const API = "http://localhost:8000/api";
 
 function parseJwt(token) {
   return JSON.parse(atob(token.split(".")[1]));
