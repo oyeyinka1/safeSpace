@@ -46,7 +46,9 @@ async function loadProfile() {
   try {
     const user = await apiRequest("/auth/profile");
     const profileInitial = document.getElementById("profileInitial");
+    const userName = document.getElementById("userName");
 
+    userName.textContent = user.email?.split("@")[0];
     profileInitial.textContent =
       user.name?.charAt(0).toUpperCase() ?? "?";
   } catch (err) {

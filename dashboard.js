@@ -17,7 +17,6 @@ const affirmations = [
   "I am healing, one day at a time.",
 ];
 
-const userName = "Michael";
 const storageKeys = {
   profileImage: "safeSpace_profileImage",
   messages: "safeSpace_messages",
