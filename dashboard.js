@@ -233,60 +233,76 @@ function closeInbox() {
 
 async function loadInboxMessages() {
   const inboxMessagesList = document.getElementById("inboxMessagesList");
+  if (!inboxMessagesList) {
+    console.error("Inbox container not found in DOM");
+    return;
+  }
 
   const token = getAuthToken();
-  const res = await fetch(API + `/messages/my-conversations`, {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
+  if (!token) return;
 
-  const result = await res.json();
+  try {
+    const res = await fetch(API + `/messages/my-conversations`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
 
-  if (!res.ok || !result.success) {
+    const result = await res.json();
+
+    if (!res.ok || !result.success) {
+      inboxMessagesList.innerHTML = `
+        <div class="inbox-empty">
+          <div class="inbox-empty-icon">⚠️</div>
+          <p>${result.error || "Failed to load messages"}</p>
+        </div>
+      `;
+      return;
+    }
+
+    const inboxMessages = result.data || [];
+
+    inboxMessagesList.innerHTML = "";
+
+    if (inboxMessages.length === 0) {
+      inboxMessagesList.innerHTML = `
+        <div class="inbox-empty">
+          <div class="inbox-empty-icon">📭</div>
+          <p>No messages yet. Your admin will reach out soon.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Display messages (newest first)
+    inboxMessages
+      .sort((a, b) => new Date(b.lastMessageAt) - new Date(a.lastMessageAt))
+      .forEach((conv) => {
+        const messageElement = document.createElement("div");
+        messageElement.className = `inbox-message-item ${
+          conv.unreadCount > 0 ? "" : "unread"
+        }`;
+
+        messageElement.innerHTML = `
+          <div class="inbox-message-sender">🛡️ Safe Space Admin</div>
+          <div class="inbox-message-time">${new Date(
+            conv.lastMessageAt
+          ).toLocaleDateString()}</div>
+        `;
+
+        inboxMessagesList.appendChild(messageElement);
+      });
+
+    updateInboxBadge();
+  } catch (err) {
+    console.error("Failed to load inbox messages:", err);
     inboxMessagesList.innerHTML = `
       <div class="inbox-empty">
         <div class="inbox-empty-icon">⚠️</div>
-        <p>${result.error || "Failed to load messages"}</p>
+        <p>Error loading messages</p>
       </div>
     `;
-    return;
   }
-
-  const inboxMessages = result.data;
-
-  inboxMessagesList.innerHTML = "";
-
-  if (!inboxMessages || inboxMessages.length === 0) {
-    inboxMessagesList.innerHTML = `
-      <div class="inbox-empty">
-        <div class="inbox-empty-icon">📭</div>
-        <p>No messages yet. Your admin will reach out soon.</p>
-      </div>
-    `;
-    return;
-  }
-
-  // Display messages (newest first)
-  inboxMessages.forEach((conv, index) => {
-    const messageElement = document.createElement("div");
-    messageElement.key = index;
-    messageElement.className = `inbox-message-item ${
-      conv.unreadCount > 0 ? "" : "unread"
-    }`;
-
-    messageElement.innerHTML = `
-      <div class="inbox-message-sender">🛡️ Safe Space Admin</div>
-      <div class="inbox-message-time">${new Date(
-        conv.lastMessageAt
-      ).toLocaleDateString()}</div>
-    `;
-
-    inboxMessagesList.appendChild(messageElement);
-  });
-
-  updateInboxBadge();
 }
+
 
 
 function saveInboxMessage(message) {

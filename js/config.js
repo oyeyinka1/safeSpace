@@ -1,1 +1,1 @@
-window.API = "http://localhost:8000/api";
+window.API = "https://safespace-api-39qb.onrender.com";
