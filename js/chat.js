@@ -50,7 +50,7 @@ async function loadProfile() {
 
     userName.textContent = user.email?.split("@")[0];
     profileInitial.textContent =
-      user.name?.charAt(0).toUpperCase() ?? "SP";
+      user.email?.split("@")[0].charAt(0).toUpperCase() ?? "SP";
   } catch (err) {
     console.error(err.message);
   }
